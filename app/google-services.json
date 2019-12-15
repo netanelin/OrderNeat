@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "452934076994",
+    "firebase_url": "https://order-and-eat-6dc14.firebaseio.com",
+    "project_id": "order-and-eat-6dc14",
+    "storage_bucket": "order-and-eat-6dc14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452934076994:android:093ad812b6980b185dfbdb",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452934076994-ab3f9cqibrahstbasun9lvemdd9l066m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwB42-s9tAF6DOfirHrbQ7Yi1ZD4_4LyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452934076994-ab3f9cqibrahstbasun9lvemdd9l066m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
