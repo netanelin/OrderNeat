@@ -21,7 +21,7 @@ public class Checkout extends AppCompatActivity {
             //The key argument here must match that used in the other activity
         }
 
-        TextView tv = findViewById(R.id.textView4);
+        TextView tv = findViewById(R.id.tv_header_total_price);
         tv.setText(val);
 
     }
