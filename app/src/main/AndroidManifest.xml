@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Admin"></activity>
+        <activity android:name=".FinalPage"></activity>
         <activity android:name=".Checkout" />
         <activity android:name=".registrarWindow" />
         <activity android:name=".Menu" />
