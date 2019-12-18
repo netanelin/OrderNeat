@@ -75,7 +75,8 @@ public class registrarWindow extends AppCompatActivity {
                        id.getText().toString(), fn.getText().toString());
 
                user.key = dbRef.push().getKey();
-               dbRef.child(id.getText().toString()).setValue(user, completionListener);
+               dbRef.child(id.getText().toString())
+                       .setValue(user, completionListener);
                pb.setVisibility(View.VISIBLE);
            }
 
