@@ -55,60 +55,57 @@ public class registrarWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_window);
 
-
         Button btC = findViewById(R.id.btnContinue);
-
-
         btC.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
+           @Override
+           public void onClick(View v) {
 
-                                       EditText fn = findViewById(R.id.etFullName);
-                                       EditText id = findViewById(R.id.etID);
-                                       EditText Password = findViewById(R.id.etPassword);
-                                       EditText Email = findViewById(R.id.etEmail);
-                                       EditText Phone = findViewById(R.id.etPhone);
-                                       ProgressBar pb = findViewById(R.id.progressBar);
+               EditText fn = findViewById(R.id.etFullName);
+               EditText id = findViewById(R.id.etID);
+               EditText Password = findViewById(R.id.etPassword);
+               EditText Email = findViewById(R.id.etEmail);
+               EditText Phone = findViewById(R.id.etPhone);
+               ProgressBar pb = findViewById(R.id.progressBar);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                                       /////////////////////////////////////////////////////////////////////
+               /////////////////////////////////////////////////////////////////////
 
-                                       User user = new User(Phone.getText().toString(), Password.getText().toString(), Email.getText().toString(),
-                                               id.getText().toString(), fn.getText().toString());
+               User user = new User(Phone.getText().toString(), Password.getText().toString(), Email.getText().toString(),
+                       id.getText().toString(), fn.getText().toString());
 
-                                       user.key = dbRef.push().getKey();
-                                       dbRef.child(id.getText().toString()).setValue(user, completionListener);
-                                       pb.setVisibility(View.VISIBLE);
-                                   }
+               user.key = dbRef.push().getKey();
+               dbRef.child(id.getText().toString()).setValue(user, completionListener);
+               pb.setVisibility(View.VISIBLE);
+           }
 
 
-                                   DatabaseReference.CompletionListener completionListener = new
-                                           DatabaseReference.CompletionListener() {
-                                               @Override
-                                               public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                                   EditText Password = findViewById(R.id.etPassword);
-                                                   EditText Email = findViewById(R.id.etEmail);
+               DatabaseReference.CompletionListener completionListener = new
+                       DatabaseReference.CompletionListener() {
+                           @Override
+                           public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                               EditText Password = findViewById(R.id.etPassword);
+                               EditText Email = findViewById(R.id.etEmail);
 
-                                                   if (databaseError != null) {
-                                                       Toast.makeText(registrarWindow.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
-                                                   } else {
-                                                       Toast.makeText(registrarWindow.this, "Saved!!", Toast.LENGTH_LONG).show();
-                                                       mAuth.createUserWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                           @Override
-                                                           public void onComplete(@NonNull Task<AuthResult> task) {
-                                                               if(task.isSuccessful()){
-                                                                   Toast.makeText(registrarWindow.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                                               }else {
-                                                                   Toast.makeText(registrarWindow.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                               if (databaseError != null) {
+                                   Toast.makeText(registrarWindow.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                               } else {
+                                   Toast.makeText(registrarWindow.this, "Saved!!", Toast.LENGTH_LONG).show();
+                                   mAuth.createUserWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                       @Override
+                                       public void onComplete(@NonNull Task<AuthResult> task) {
+                                           if(task.isSuccessful()){
+                                               Toast.makeText(registrarWindow.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                           }else {
+                                               Toast.makeText(registrarWindow.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
-                                                               }
-                                                           }
-                                                       });
-                                                       Intent i = new Intent(registrarWindow.this,Menu.class);
-                                                       startActivity(i);
-                                                       finish();
-                                                   }
+                                           }
+                                       }
+                                   });
+                                   Intent i = new Intent(registrarWindow.this,Menu.class);
+                                   startActivity(i);
+                                   finish();
+                               }
                                                }
 
                                 };
