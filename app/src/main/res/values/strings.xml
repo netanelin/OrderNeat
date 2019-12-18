@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string-array name="Entrees">
+        <item>Choose a dish</item>
+        <item>Salmon________________________________18.00$</item>
+        <item>Turkey________________________________17.00$ </item>
+        <item>sweet potato soup_____________________12.00$</item>
+        <item>onion soup____________________________12.00$</item>>
+    </string-array>
+    <string-array name="Main_Dishes">
+        <item>Choose a dish</item>
+        <item>Crispy Duck Wings_____________________20.00$</item>
+        <item>Ricotta_______________________________25.00$</item>
+        <item>Bowery "Rib-Cap" Steak________________30.00$</item>
+        <item>Côte De Boeuf_________________________32.00$</item>
+    </string-array>
+    <string-array name="DESSERT">
+        <item>Choose a dish</item>
+        <item>Ice Cream and Sorbet__________________7.00$</item>
+        <item>Cookies_______________________________5.00$</item>
+        <item>BMC Bread Pudding_____________________10.00$</item>
+        <item>Pudding_______________________________12.00$</item>
+    </string-array>
 </resources>
+

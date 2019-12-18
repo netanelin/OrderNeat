@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class login_window extends AppCompatActivity {
 
     Button button;
-    public FirebaseAuth mAuth = FirebaseAuth.getInstance();;
+    ProgressBar pb;
+    public FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class login_window extends AppCompatActivity {
         setContentView(R.layout.login_window);
 
         button = findViewById(R.id.button2);
+        pb = findViewById(R.id.progressBar2);
 //////////////////////////////////////////////////////////////////////////////
         final Button logIn = findViewById(R.id.button);
 
@@ -38,6 +41,7 @@ public class login_window extends AppCompatActivity {
             public void onClick(View v) {
                 EditText etEmail = findViewById(R.id.editText);
                 EditText etPassword = findViewById(R.id.editText2);
+                pb.setVisibility(View.VISIBLE);
 
                 mAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
                         .addOnCompleteListener(login_window.this, new OnCompleteListener<AuthResult>() {
@@ -55,6 +59,8 @@ public class login_window extends AppCompatActivity {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(login_window.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
+                                    pb.setVisibility(View.INVISIBLE);
+
                                 }
                             }
                         });

@@ -69,6 +69,10 @@ public class registrarWindow extends AppCompatActivity {
                                        EditText Email = findViewById(R.id.etEmail);
                                        EditText Phone = findViewById(R.id.etPhone);
                                        ProgressBar pb = findViewById(R.id.progressBar);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                                       /////////////////////////////////////////////////////////////////////
 
                                        User user = new User(Phone.getText().toString(), Password.getText().toString(), Email.getText().toString(),
                                                id.getText().toString(), fn.getText().toString());
@@ -90,7 +94,6 @@ public class registrarWindow extends AppCompatActivity {
                                                        Toast.makeText(registrarWindow.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
                                                    } else {
                                                        Toast.makeText(registrarWindow.this, "Saved!!", Toast.LENGTH_LONG).show();
-                                                       Intent i = new Intent(registrarWindow.this,Menu.class);
                                                        mAuth.createUserWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                            @Override
                                                            public void onComplete(@NonNull Task<AuthResult> task) {
@@ -102,6 +105,7 @@ public class registrarWindow extends AppCompatActivity {
                                                                }
                                                            }
                                                        });
+                                                       Intent i = new Intent(registrarWindow.this,Menu.class);
                                                        startActivity(i);
                                                        finish();
                                                    }
