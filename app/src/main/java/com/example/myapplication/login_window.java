@@ -52,9 +52,15 @@ public class login_window extends AppCompatActivity {
                                     Toast.makeText(login_window.this, "signInWithEmail:success",
                                             Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    startActivity( new Intent(login_window.this,Menu.class));
-                                    finish();
-
+                                    ///Admin check!!
+                                    if(user.getEmail().equals("admin@admin.com")){
+                                        startActivity(new Intent(login_window.this, Admin.class));
+                                        finish();
+                                    }
+                                    else {
+                                        startActivity(new Intent(login_window.this, Menu.class));
+                                        finish();
+                                        }
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(login_window.this, "Authentication failed.",
