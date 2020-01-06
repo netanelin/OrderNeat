@@ -71,7 +71,7 @@ public class login extends AppCompatActivity {
                             //show success toast
                             Toast.makeText(login.this, "signed in successfully!",Toast.LENGTH_LONG).show();
                             //get user uid from auth
-                            FirebaseUser user = user_auth.getCurrentUser();
+                            FirebaseUser  user = user_auth.getCurrentUser();
                             //role specific redirection
                             //get user document named as the user auth uid
                             DocumentReference docRef = db.collection("Users").document(user.getUid());
@@ -129,6 +129,9 @@ public class login extends AppCompatActivity {
                                         ///--------debug--------
                                         System.out.println("cant reach firestore");
                                         ///--------debug--------
+
+                                        Toast.makeText(login.this, "cant reach firestore",Toast.LENGTH_LONG).show();
+
                                     }
 
                                 }
@@ -137,7 +140,7 @@ public class login extends AppCompatActivity {
                         //invalid user
                         else{
                             //show fail toast
-                            Toast.makeText(login.this, "signing in proccess failed",Toast.LENGTH_LONG).show();
+                            Toast.makeText(login.this, "invalid user",Toast.LENGTH_LONG).show();
                         }
                     });
         });
