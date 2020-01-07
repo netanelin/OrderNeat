@@ -23,10 +23,10 @@ import java.util.Map;
 
 
 public class login extends AppCompatActivity {
-    public FirebaseAuth user_auth ;
-    private  Button bt_login ;
-    private  Button bt_register ;
-    private  Button bt_employee_register ;
+    private FirebaseAuth user_auth ;
+    private Button bt_login ;
+    private Button bt_register ;
+    private Button bt_employee_register ;
     private EditText et_email ;
     private EditText et_password ;
     private ProgressBar pb;

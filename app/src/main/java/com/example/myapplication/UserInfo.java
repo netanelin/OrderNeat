@@ -1,29 +1,19 @@
 package com.example.myapplication;
 
-class User {
-    private String UID;
+class UserInfo {
     private String role;
     private String first_name;
     private String last_name;
     private String phone_num;
 
-    public User() {
+    public UserInfo() {
     }
 
-    public User(String UID, String role, String first_name, String last_name, String phone_num) {
-        this.UID = UID;
+    public UserInfo(String first_name, String last_name, String phone_num, String role) {
         this.role = role;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone_num = phone_num;
-    }
-
-    public String getUID() {
-        return UID;
-    }
-
-    public void setUID(String UID) {
-        this.UID = UID;
     }
 
     public String getRole() {
