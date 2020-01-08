@@ -26,7 +26,6 @@ public class login extends AppCompatActivity {
     private FirebaseAuth user_auth ;
     private Button bt_login ;
     private Button bt_register ;
-    private Button bt_employee_register ;
     private EditText et_email ;
     private EditText et_password ;
     private ProgressBar pb;
@@ -38,7 +37,6 @@ public class login extends AppCompatActivity {
         user_auth = FirebaseAuth.getInstance();
         bt_login = findViewById(R.id.bt_login);
         bt_register = findViewById(R.id.bt_register);
-        bt_employee_register = findViewById(R.id.bt_employee_register);
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
         pb = findViewById(R.id.pb);
@@ -46,16 +44,9 @@ public class login extends AppCompatActivity {
 
         //redirection to costumer registration
         bt_register.setOnClickListener(v -> {
-          Intent direct_to_costumer_register_page = new Intent(login.this, costumer_register.class);
+          Intent direct_to_costumer_register_page = new Intent(login.this, register.class);
           startActivity(direct_to_costumer_register_page);
           finish();
-        });
-
-        //redirection to employee registration
-        bt_employee_register.setOnClickListener(v -> {
-            Intent direct_to_employee_register_page = new Intent(login.this, employee_register.class);
-            startActivity(direct_to_employee_register_page);
-            finish();
         });
 
         //login process

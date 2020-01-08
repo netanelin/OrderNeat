@@ -12,8 +12,7 @@
         <activity android:name=".manager_panel"/>
         <activity android:name=".orders_panel" />
         <activity android:name=".menu" />
-        <activity android:name=".employee_register" />
-        <activity android:name=".costumer_register" />
+        <activity android:name=".register" />
         <activity android:name=".login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

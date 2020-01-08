@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005"
+        app:layout_constraintVertical_bias="0.031"
         app:srcCompat="@drawable/logogo" />
 
     <EditText
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.46" />
+        app:layout_constraintVertical_bias="0.478" />
 
     <EditText
         android:id="@+id/et_email"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.376" />
+        app:layout_constraintVertical_bias="0.393" />
 
     <Button
         android:id="@+id/bt_login"
@@ -59,39 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575">
-
-    </Button>
-
-    <Button
-        android:id="@+id/bt_register"
-        android:layout_width="69dp"
-        android:layout_height="29dp"
-        android:width="300dp"
-        android:background="@android:color/holo_orange_dark"
-        android:text="Register"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.685">
-
-    </Button>
-
-    <Button
-        android:id="@+id/bt_employee_register"
-        android:layout_width="69dp"
-        android:layout_height="29dp"
-        android:width="300dp"
-        android:background="@android:color/holo_orange_dark"
-        android:text="Register as Employee "
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.743">
+        app:layout_constraintVertical_bias="0.625">
 
     </Button>
 
@@ -106,6 +74,22 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879" />
+        app:layout_constraintVertical_bias="0.841" />
+
+    <Button
+        android:id="@+id/bt_register"
+        android:layout_width="69dp"
+        android:layout_height="29dp"
+        android:width="300dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="Register"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.732">
+
+    </Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
