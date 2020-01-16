@@ -30,13 +30,8 @@ class ProductsList extends ArrayAdapter<Map<String, Object>> {
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
-        //textViewName.setTextColor(Color.BLACK);
-
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
-        //textViewPrice.setTextColor(Color.BLACK);
-
         TextView textViewDescription = (TextView) listViewItem.findViewById(R.id.textViewDescription);
-        //textViewDescription.setTextColor(Color.BLACK);
 
 
 

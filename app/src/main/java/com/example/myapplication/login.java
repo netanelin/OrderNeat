@@ -69,11 +69,6 @@ public class login extends AppCompatActivity {
                             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                                    ///--------debug--------
-                                    Toast.makeText(login.this, "Debug : inside 'on complete'",Toast.LENGTH_LONG).show();
-                                    ///--------debug--------
-
                                     //if we managed to contact firestore and got an answer
                                     if (task.isSuccessful()) {
                                         DocumentSnapshot document = task.getResult();
@@ -81,11 +76,6 @@ public class login extends AppCompatActivity {
                                         if (document.exists()) {
                                             //get the document as a map
                                             Map m = document.getData();
-
-                                            ///--------debug--------
-                                            System.out.println(m);
-                                            ///--------debug--------
-
                                             //get the role from the map
                                             Object oRole = m.get("role");
                                             //cast to string
