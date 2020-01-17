@@ -196,7 +196,13 @@ public class orders_panel extends AppCompatActivity {
 
         }
         mapAsString.append("Total: "+chosen_product.get("total").toString()+" ILS");
-
+        mapAsString.append("\n");
+        mapAsString.append("\n");
+        if(chosen_product.get("comments").toString().equals(null)){
+            mapAsString.append("Comments: Nothing");
+        }else {
+            mapAsString.append("Comments: "+chosen_product.get("comments").toString());
+        }
 
 
 //        StringBuilder mapAsString = new StringBuilder();
