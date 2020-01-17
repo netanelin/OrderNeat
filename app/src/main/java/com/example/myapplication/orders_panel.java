@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -149,7 +150,7 @@ public class orders_panel extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Map<String, Object> chosen_product = wfApprove.get(currentClickedOrderWFS);
-                        String nameOfOrder = chosen_product.get("AID").toString();
+                        String nameOfOrder = chosen_product.get("OID").toString();
                         db.collection("Orders").document(nameOfOrder).update("served",true);
                         dialog.dismiss();
                     }
@@ -180,11 +181,30 @@ public class orders_panel extends AppCompatActivity {
     }
     public String convertWithIteration(Map<String, Object> chosen_product) {
         StringBuilder mapAsString = new StringBuilder();
-        for (String key : chosen_product.keySet()) {
-            mapAsString.append(key + ": " + chosen_product.get(key));
+        List<Map<String, Object>> items = (List<Map<String, Object>>) chosen_product.get("items");
+        int i = 0;
+        for (Map<String, Object> item : items){
+            mapAsString.append("Dish Name: "+items.get(i).get("name"));
             mapAsString.append("\n");
+            mapAsString.append("Price: "+items.get(i).get("price")+" ILS");
+            mapAsString.append("\n");
+            mapAsString.append("Quantity: "+items.get(i).get("quantity"));
+            mapAsString.append("\n");
+            i++;
+            mapAsString.append("\n");
+            mapAsString.append("\n");
+
         }
-        //mapAsString.delete(mapAsString.length()-2, mapAsString.length()).append("}");
-        return mapAsString.toString();
+        mapAsString.append("Total: "+chosen_product.get("total").toString()+" ILS");
+
+
+
+//        StringBuilder mapAsString = new StringBuilder();
+//        for (String key : chosen_product.keySet()) {
+//                mapAsString.append(key + ": " + chosen_product.get(key));
+//                mapAsString.append("\n");
+//        }
+//        //mapAsString.delete(mapAsString.length()-2, mapAsString.length()).append("}");
+       return mapAsString.toString();
     }
 }

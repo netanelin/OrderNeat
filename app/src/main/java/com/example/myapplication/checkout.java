@@ -37,6 +37,7 @@ public class checkout extends AppCompatActivity{
     private Button bt_place_order;
     private ProgressBar pb;
     private FirebaseAuth mAuth;
+    Map<String,Object> order;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -54,8 +55,8 @@ public class checkout extends AppCompatActivity{
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        Map<String,Object> orders = (Map<String,Object>) bundle.getSerializable("order");
-        String totalPrice = orders.get("total").toString();
+         order = (Map<String,Object>) bundle.getSerializable("order");
+        String totalPrice = order.get("total").toString();
         tv_total_price.setText(totalPrice+" ILS");
 
         bt_place_order.setOnClickListener(new View.OnClickListener() {
@@ -68,12 +69,16 @@ public class checkout extends AppCompatActivity{
                 String card = et_card_number.getText().toString();
                 String comments = et_comments.getText().toString();
 
-                Map<String, Object> m =new HashMap<>();
-                m.put("user_ID", uid);
-                m.put("card_number", card);
-                m.put("comments", comments);
+                order.put("comments", comments);
+                order.put("card_number", card);
+                order.put("served",false);
 
-                db.collection("Orders").document().set(m).addOnSuccessListener(new OnSuccessListener<Void>() {
+                ////should be a barcode!!!
+                order.put("table",1);
+                ////////////////////////////
+
+
+                db.collection("Orders").document(order.get("OID").toString()).set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(checkout.this,"your order is on it's way!",Toast.LENGTH_LONG).show();

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#03A9F4"
     android:hapticFeedbackEnabled="true"
-    tools:context=".Checkout">
+    tools:context=".checkout">
 
     <TextView
         android:id="@+id/tv_total_price"

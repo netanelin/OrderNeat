@@ -37,9 +37,11 @@ class OrdersList extends ArrayAdapter<Map<String, Object>> {
 
         Map<String, Object> order = OrderList.get(position);
 
-        textViewOrderTime.setText("Order ID: "+ (order.get("AID")));
-        textTableNum.setText("Table Number: "+order.get("table_num"));
-        textViewTotalPrice.setText("Total Price: "+order.get("total_price"));
+
+
+        textViewOrderTime.setText("Order Number: "+order.get("OID"));
+        textTableNum.setText("Table Number: "+order.get("table"));
+        textViewTotalPrice.setText("Total: "+order.get("total"));
 
         return listViewOrder;
     }
