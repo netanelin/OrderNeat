@@ -52,6 +52,12 @@ public class checkout extends AppCompatActivity{
         pb = findViewById(R.id.pb);
 
 
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        Map<String,Object> orders = (Map<String,Object>) bundle.getSerializable("order");
+        String totalPrice = orders.get("total").toString();
+        tv_total_price.setText(totalPrice+" ILS");
+
         bt_place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

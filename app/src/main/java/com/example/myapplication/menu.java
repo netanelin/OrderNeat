@@ -73,7 +73,9 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
                 order.put("total", current_price);
                 order.put("items", ordered_items);
                 Intent i = new Intent(menu.this,checkout.class);
-                i.putExtra("order", (Serializable) order);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("order", (Serializable) order);
+                i.putExtras(bundle);
                 startActivity(i);
                 finish();
 
@@ -144,8 +146,6 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
         new_item.put("quantity", quantity);
         new_item.put("price", item_price_times_quantity);
         ordered_items.add(new_item);
-
-
 
     }
 
