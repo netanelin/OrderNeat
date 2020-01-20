@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ class ProductsList extends ArrayAdapter<Map<String, Object>> {
     private List<Map<String, Object>> products_list;
 
     public ProductsList(Activity context, List<Map<String, Object>> products_list){
-        super(context, R.layout.list_layout, products_list);
+        super(context, R.layout.product_list_layout, products_list);
         this.context = context;
         this.products_list = products_list;
     }
@@ -28,7 +27,7 @@ class ProductsList extends ArrayAdapter<Map<String, Object>> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
+        View listViewItem = inflater.inflate(R.layout.product_list_layout, null, true);
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
         TextView textViewDescription = (TextView) listViewItem.findViewById(R.id.textViewDescription);
