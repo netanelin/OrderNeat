@@ -4,10 +4,20 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -98,6 +108,64 @@ public class checkout extends AppCompatActivity{
             }
         });
 
+        et_comments.addTextChangedListener(new TextWatcher() {
+            boolean isOnTextChanged = true;
 
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (isOnTextChanged) {
+                    isOnTextChanged = false;
+                    setNotify();
+                }
+
+            }
+        });
+
+
+    }
+
+    public void setNotify(){
+
+        String channelId = "MY_CHANNEL_ID";
+
+        //Step 1
+        Intent landingIntent = new Intent();
+        PendingIntent pendingLandingIntent = PendingIntent.getActivity(this, 0, landingIntent,0);
+
+        //Step 2
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        //Step 3
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+
+            NotificationChannel channel = new NotificationChannel(channelId, "Note!", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Help us know exactly what you need\n");
+            notificationManager.createNotificationChannel(channel);
+            // builder.setChannelId(channelId);
+        }
+
+        //Step4
+        NotificationCompat.Builder builder = new
+                NotificationCompat.Builder(getApplicationContext(), channelId);
+        Notification notification = builder.setContentIntent(pendingLandingIntent)
+                .setSmallIcon(R.drawable.chef)
+                .setWhen(System.currentTimeMillis())
+                .setAutoCancel(true)
+                .setContentTitle("TIP!")
+                .setContentText("Clear comment will help us to give U our best service").build();
+
+
+        //Step 5
+        notificationManager.notify(1, notification);
     }
 }
