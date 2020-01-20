@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ class OrdersList extends ArrayAdapter<Map<String, Object>> {
     private List<Map<String, Object>> OrderList;
 
     public OrdersList(Activity context, List<Map<String, Object>> OrderList){
-        super(context, R.layout.list_layout, OrderList);
+        super(context, R.layout.product_list_layout, OrderList);
         this.context = context;
         this.OrderList = OrderList;
     }

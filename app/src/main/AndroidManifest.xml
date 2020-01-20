@@ -11,7 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".barcodeClient"></activity>
+=======
+        <activity android:name=".Products_management"
+            android:parentActivityName=".manager_panel"></activity>
+        <activity android:name=".Employees_management"
+            android:parentActivityName=".manager_panel"/>
+>>>>>>> c3d973cdfff4f9614a43593f6ff3d06b77fade87
         <activity android:name=".manager_panel" />
         <activity android:name=".orders_panel" />
         <activity android:name=".menu" />

@@ -4,15 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0590B5"
     tools:context=".manager_panel">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_management_panel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="activity_manager_panel"
+        android:text="Managment Panel"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.175" />
+
+    <Button
+        android:id="@+id/button_manage_employees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:includeFontPadding="true"
+        android:outlineAmbientShadowColor="#9C0537"
+        android:outlineProvider="background"
+        android:outlineSpotShadowColor="#9C0537"
+        android:paddingHorizontal="10dp"
+        android:text="manage employees"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442" />
+
+    <Button
+        android:id="@+id/button_manage_products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:outlineAmbientShadowColor="#9C0537"
+        android:outlineProvider="background"
+        android:outlineSpotShadowColor="#9C0537"
+        android:paddingHorizontal="10dp"
+        android:text="manage products"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.54" />
 </androidx.constraintlayout.widget.ConstraintLayout>
