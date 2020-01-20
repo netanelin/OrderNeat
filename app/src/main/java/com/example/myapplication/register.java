@@ -105,8 +105,9 @@ public class register extends AppCompatActivity {
                                                     //redirect the new user to next activity by role
                                                     //redirect employee to order managment
                                                     if(cb_as_employee.isChecked()){
-                                                        Intent direct_to_orders_panel = new Intent(register.this, orders_panel.class);
+                                                        Intent direct_to_orders_panel = new Intent(register.this, login.class);
                                                         startActivity(direct_to_orders_panel);
+                                                        Toast.makeText(register.this,"Please wait for approval",Toast.LENGTH_LONG).show();
                                                         finish();
                                                     }else{
                                                         Intent direct_to_menu_page = new Intent(register.this, menu.class);
