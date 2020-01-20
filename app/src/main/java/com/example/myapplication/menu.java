@@ -33,6 +33,7 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
     private ListView listViewProducts;
     private TextView textViewPrice;
     private Button buttonProccedToCheckout;
+    private Button clear;
 
     private List<Map<String, Object>> productsList;
     private FirebaseFirestore db;
@@ -54,6 +55,7 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
         textViewPrice.setText(current_price + " nis");
         user_auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        clear = findViewById(R.id.resBtn);
 
         order = new HashMap<>();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -81,12 +83,27 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
 
             }
         });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productsList.clear();
+                ordered_items.clear();
+                current_price = 0;
+                textViewPrice.setText(current_price + " nis");
+                listViewProducts.requestLayout();
+                getDataToLV();
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        getDataToLV();
+    }
 
+    public void getDataToLV () {
         //show all available products in listView. (updates in realtime)
         db.collection("Products")
                 .whereEqualTo("available", true)
@@ -103,8 +120,8 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
                         productsList.clear();
                         //for each document in the collection
                         for (QueryDocumentSnapshot productSnapshot : queryDocumentSnapshots)
-                                //add the product to the list as a Map<String, Object>
-                                productsList.add(productSnapshot.getData());
+                            //add the product to the list as a Map<String, Object>
+                            productsList.add(productSnapshot.getData());
                         Log.d(TAG, "Current available products: " + productsList);
                         //creating new adapter and giving him this activity as context and the current list of products
                         ProductsList adapter = new ProductsList(menu.this, productsList);
@@ -126,7 +143,6 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
             }
         });
     }
-
     private void openDialog() {
         NumpickDialog numpickDialog = new NumpickDialog();
         numpickDialog.show(getSupportFragmentManager(), "Quantity picker");
