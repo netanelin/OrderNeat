@@ -89,9 +89,16 @@ public class login extends AppCompatActivity {
 
                                             //if user is an employee direct him to orders_panel
                                             if(sRole.equals("employee")){
-                                                Intent direct_to_orders_panel = new Intent(login.this, orders_panel.class);
-                                                startActivity(direct_to_orders_panel);
-                                                finish();
+
+                                                if((boolean)m.get("approved")) {
+                                                    Intent direct_to_orders_panel = new Intent(login.this, orders_panel.class);
+                                                    startActivity(direct_to_orders_panel);
+                                                    finish();
+                                                }
+                                                else{
+                                                    Toast.makeText(login.this, "Waiting for manager approval", Toast.LENGTH_LONG).show();
+                                                    pb.setVisibility(View.INVISIBLE);
+                                                }
                                             }
 
                                             //if user is a manager direct him to manager_panel
@@ -103,6 +110,8 @@ public class login extends AppCompatActivity {
                                         } else {
                                             System.out.println("problem finding user role");
                                             Toast.makeText(login.this, "problem finding user role",Toast.LENGTH_LONG).show();
+                                            pb.setVisibility(View.INVISIBLE);
+
 
                                         }
                                         //if we didnt manage to contact firestore
@@ -112,6 +121,8 @@ public class login extends AppCompatActivity {
                                         ///--------debug--------
 
                                         Toast.makeText(login.this, "cant reach firestore",Toast.LENGTH_LONG).show();
+                                        pb.setVisibility(View.INVISIBLE);
+
 
                                     }
 
@@ -122,6 +133,8 @@ public class login extends AppCompatActivity {
                         else{
                             //show fail toast
                             Toast.makeText(login.this, "invalid user",Toast.LENGTH_LONG).show();
+                            pb.setVisibility(View.INVISIBLE);
+
                         }
                     });
         });
