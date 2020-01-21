@@ -73,11 +73,6 @@ public class checkout extends AppCompatActivity{
                 order.put("card_number", card);
                 order.put("served",false);
 
-                ////should be a barcode!!!
-                order.put("table",1);
-                ////////////////////////////
-
-
                 db.collection("Orders").document(order.get("OID").toString()).set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

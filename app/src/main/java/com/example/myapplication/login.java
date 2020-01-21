@@ -82,8 +82,8 @@ public class login extends AppCompatActivity {
                                             String sRole = (String)oRole;
                                             //if user is a costumer direct him to menu (in the future direct to qrscanner)
                                             if(sRole.equals("costumer")){
-                                                Intent direct_to_menu_page = new Intent(login.this, menu.class);
-                                                startActivity(direct_to_menu_page);
+                                                Intent direct_to_QR__scanner = new Intent(login.this, QrScanner.class);
+                                                startActivity(direct_to_QR__scanner);
                                                 finish();
                                             }
 
