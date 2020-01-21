@@ -3,8 +3,16 @@ package com.example.myapplication;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,6 +74,7 @@ public class orders_panel extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         //When the dish is not served yet!!
         db.collection("Orders").whereEqualTo("served",false).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -140,6 +149,13 @@ public class orders_panel extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+
 
 //**************************************************************************************************
     private void openDialog1() {
