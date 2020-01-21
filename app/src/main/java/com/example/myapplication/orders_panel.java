@@ -162,6 +162,7 @@ public class orders_panel extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(orders_panel.this).create();
         alertDialog.setTitle("Order Confirmation\n");
         alertDialog.setMessage("Are you sure to confirm the order?");
+        alertDialog.setIcon(R.drawable.chef);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -182,6 +183,7 @@ public class orders_panel extends AppCompatActivity {
     private void openDialog2() {
         AlertDialog alertDialog = new AlertDialog.Builder(orders_panel.this).create();
         alertDialog.setTitle("Order Details\n");
+        alertDialog.setIcon(R.drawable.chef);
         Map<String,Object> chosen_product = Approved.get(currentClickedOrderS);
         String str = convertWithIteration(chosen_product);
 

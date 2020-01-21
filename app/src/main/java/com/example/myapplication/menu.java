@@ -1,12 +1,15 @@
 package com.example.myapplication;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -72,15 +75,19 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
         buttonProccedToCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                order.put("total", current_price);
-                order.put("items", ordered_items);
-                Intent i = new Intent(menu.this,checkout.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("order", (Serializable) order);
-                i.putExtras(bundle);
-                startActivity(i);
-                finish();
-
+                if (current_price == 0){
+                    openDialog2();
+                }
+                else {
+                    order.put("total", current_price);
+                    order.put("items", ordered_items);
+                    Intent i = new Intent(menu.this, checkout.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("order", (Serializable) order);
+                    i.putExtras(bundle);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
@@ -165,5 +172,18 @@ public class menu extends AppCompatActivity implements NumpickDialog.NumpickDial
 
     }
 
+    private void openDialog2() {
+        AlertDialog alertDialog = new AlertDialog.Builder(menu.this).create();
+        alertDialog.setTitle("Error");
+        alertDialog.setMessage("You should pick some dishes, no?");
+        alertDialog.setIcon(R.drawable.chef);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
 
+    }
 }

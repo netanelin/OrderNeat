@@ -3,6 +3,7 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
@@ -11,6 +12,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -72,35 +74,8 @@ public class checkout extends AppCompatActivity{
         bt_place_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pb.setVisibility(View.VISIBLE);
-                mAuth = FirebaseAuth.getInstance();
-
-                String uid = mAuth.getUid().toString();
-                String card = et_card_number.getText().toString();
-                String comments = et_comments.getText().toString();
-
-                order.put("comments", comments);
-                order.put("card_number", card);
-                order.put("served",false);
-
-                db.collection("Orders").document(order.get("OID").toString()).set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(checkout.this,"your order is on it's way!",Toast.LENGTH_LONG).show();
-
-                        Intent direct_to_final_page = new Intent(checkout.this, finalPage.class);
-                        startActivity(direct_to_final_page);
-                        finish();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                        Toast.makeText(checkout.this,"Error writing order info to DB",Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
+                sendOrder();
+              }
         });
 
         et_comments.addTextChangedListener(new TextWatcher() {
@@ -129,6 +104,61 @@ public class checkout extends AppCompatActivity{
 
     }
 
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+    public void sendOrder(){
+        mAuth = FirebaseAuth.getInstance();
+
+        String uid = mAuth.getUid().toString();
+        String card = et_card_number.getText().toString();
+        String comments = et_comments.getText().toString();
+
+        if(card.isEmpty()) //if email is empty
+        {
+            et_card_number.setError("card number is required");
+            et_card_number.requestFocus();
+            return;
+        }
+
+        if(card.length() < 16) //the password need to be over than 5
+        {
+            et_card_number.setError("minimum length of card number should be 16");
+            et_card_number.requestFocus();
+            return;
+        }
+        if(comments.isEmpty()) //if email is empty
+        {
+            et_comments.setError("we want to here so comment from you :)");
+            et_comments.requestFocus();
+            return;
+        }
+        pb.setVisibility(View.VISIBLE);
+        order.put("comments", comments);
+        order.put("card_number", card);
+        order.put("served",false);
+
+        db.collection("Orders").document(order.get("OID").toString()).set(order).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(checkout.this,"your order is on it's way!",Toast.LENGTH_LONG).show();
+
+                Intent direct_to_final_page = new Intent(checkout.this, finalPage.class);
+                startActivity(direct_to_final_page);
+                finish();
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                        Toast.makeText(checkout.this,"Error writing order info to DB",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+
+    }
     public void setNotify(){
 
         String channelId = "MY_CHANNEL_ID";
@@ -157,7 +187,7 @@ public class checkout extends AppCompatActivity{
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
                 .setContentTitle("TIP!")
-                .setContentText("Clear comment will help us to give U our best service").build();
+                .setContentText("Clear comment will help us give U our best service").build();
 
 
         //Step 5
