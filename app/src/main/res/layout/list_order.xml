@@ -4,17 +4,18 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvOrderTime"
+        android:id="@+id/order_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Order Time"
-        android:textSize="18dp" />
+        android:text="Order Id"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        />
 
     <TextView
         android:id="@+id/tvTableNum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Table"
+        android:text="Table number"
         android:textSize="18dp" />
 
     <TextView
@@ -23,4 +24,5 @@
         android:layout_height="wrap_content"
         android:text="Total Price"
         android:textSize="18dp" />
+
 </LinearLayout>

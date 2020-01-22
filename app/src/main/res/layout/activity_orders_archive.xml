@@ -5,40 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".orders_panel">
+    tools:context=".orders_archive">
 
     <TextView
-        android:id="@+id/textView_order_management"
+        android:id="@+id/textView_order_archive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="Order management"
+        android:text="Order archive"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/listView_waiting_for_approval"
+        android:id="@+id/listView_approved"
         android:layout_width="362dp"
         android:layout_height="507dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_order_management" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_order_archive" />
 
-    <Button
-        android:id="@+id/button_order_archive"
-        android:layout_width="362dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="21dp"
-        android:background="#A4C9F3"
-        android:text="Order archive"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView_waiting_for_approval"
-        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -18,7 +17,7 @@ class OrdersList extends ArrayAdapter<Map<String, Object>> {
     private List<Map<String, Object>> OrderList;
 
     public OrdersList(Activity context, List<Map<String, Object>> OrderList){
-        super(context, R.layout.product_list_layout, OrderList);
+        super(context, R.layout.list_order, OrderList);
         this.context = context;
         this.OrderList = OrderList;
     }
@@ -28,17 +27,14 @@ class OrdersList extends ArrayAdapter<Map<String, Object>> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewOrder = inflater.inflate(R.layout.list_order, null, true);
-        TextView textViewOrderTime = (TextView) listViewOrder.findViewById(R.id.tvOrderTime);
+        TextView textViewOrderId = (TextView) listViewOrder.findViewById(R.id.order_id);
         TextView textTableNum = (TextView) listViewOrder.findViewById(R.id.tvTableNum);
+        //TextView textViewOrderTime = (TextView) listViewOrder.findViewById(R.id.tvOrderTime);
         TextView textViewTotalPrice = (TextView) listViewOrder.findViewById(R.id.tvTotalPrice);
 
-
-
         Map<String, Object> order = OrderList.get(position);
-
-
-
-        textViewOrderTime.setText("Order Number: "+order.get("OID"));
+        textViewOrderId.setText("Order Number: "+order.get("OID"));
+        //textViewOrderTime.setText("Ordered at" + ((Timestamp)order.get("ordered_at")).);
         textTableNum.setText("Table Number: "+order.get("table"));
         textViewTotalPrice.setText("Total: "+order.get("total"));
 

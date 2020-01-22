@@ -3,22 +3,15 @@ package com.example.myapplication;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
@@ -27,9 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,34 +30,31 @@ public class orders_panel extends AppCompatActivity {
     private static final String TAG = "orders_panel";
 
     //Contents
-    private ListView lvUp;
-    private ListView lvDown;
+    private ListView waiting_list_view;
     private FirebaseFirestore db;
     //For the list view
     private Map<String, Object> order;
-    private List<Map<String, Object>> wfApprove;
-    private List<Map<String, Object>> Approved;
+    private List<Map<String, Object>> waiting_list;
+    private int currentClickedWaitingOrder;
+    private Button button_order_archive;
 
-    private int currentClickedOrderWFS;
-    private int currentClickedOrderS;
-
-    private Order orderchoosed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders_panel);
-
-
-        lvUp = (ListView) findViewById(R.id.lvWFapproval);
-        lvDown = (ListView) findViewById(R.id.lvApproved);
-
-
+        waiting_list_view = (ListView) findViewById(R.id.listView_waiting_for_approval);
         user_auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        waiting_list = new ArrayList<>();
+        button_order_archive = findViewById(R.id.button_order_archive);
 
-        wfApprove = new ArrayList<>();
-        Approved = new ArrayList<>();
-
+        button_order_archive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(orders_panel.this, orders_archive.class);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -85,118 +73,56 @@ public class orders_panel extends AppCompatActivity {
                 }
 
                 //empty products list before getting the new one from firestore
-                wfApprove.clear();
+                waiting_list.clear();
                 //for each document in the collection
                 for (QueryDocumentSnapshot orderSnapshot : queryDocumentSnapshots)
                     //add the product to the list as a Map<String, Object>
-                    wfApprove.add(orderSnapshot.getData());
-                Log.d(TAG, "Current Waiting Orders: " + wfApprove);
+                    waiting_list.add(orderSnapshot.getData());
+                Log.d(TAG, "Current Waiting Orders: " + waiting_list);
                 //creating new adapter and giving him this activity as context and the current list of products
-                OrdersList adapter = new OrdersList(orders_panel.this, wfApprove);
+                OrdersList adapter = new OrdersList(orders_panel.this, waiting_list);
 
                 //giving the adapter to the listView
-                lvUp.setAdapter(adapter);
+                waiting_list_view.setAdapter(adapter);
 
             }
         });
 
-        lvUp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        waiting_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                currentClickedOrderWFS = position;
-                openDialog1();
+                currentClickedWaitingOrder = position;
+                openApprovalDialog();
             }
         });
-
-
-
-        //When served
-
-        db.collection("Orders").whereEqualTo("served",true).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w(TAG, "Listen to Orders list failed.", e);
-                    return;
-                }
-
-                //empty products list before getting the new one from firestore
-                Approved.clear();
-                //for each document in the collection
-                for (QueryDocumentSnapshot orderSnapshot : queryDocumentSnapshots)
-                    //add the product to the list as a Map<String, Object>
-                    Approved.add(orderSnapshot.getData());
-                Log.d(TAG, "Current Waiting Orders: " + Approved);
-                //creating new adapter and giving him this activity as context and the current list of products
-                OrdersList adapter = new OrdersList(orders_panel.this, Approved);
-
-                //giving the adapter to the listView
-                lvDown.setAdapter(adapter);
-
-            }
-        });
-
-        lvDown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                currentClickedOrderS = position;
-                openDialog2();
-            }
-        });
-
-
-
-
-
     }
 
 
-
-
-
-
-
-
-//**************************************************************************************************
-    private void openDialog1() {
+    private void openApprovalDialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(orders_panel.this).create();
-        alertDialog.setTitle("Order Confirmation\n");
-        alertDialog.setMessage("Are you sure to confirm the order?");
+        alertDialog.setTitle("Serve order\n");
+        alertDialog.setMessage("Please confirm order has been served");
         alertDialog.setIcon(R.drawable.chef);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Map<String, Object> chosen_product = wfApprove.get(currentClickedOrderWFS);
+                        Map<String, Object> chosen_product = waiting_list.get(currentClickedWaitingOrder);
                         String nameOfOrder = chosen_product.get("OID").toString();
                         db.collection("Orders").document(nameOfOrder).update("served",true);
                         dialog.dismiss();
                     }
                 });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+            }
+        });
         alertDialog.show();
 
     }
 
 
-
-
-
-    private void openDialog2() {
-        AlertDialog alertDialog = new AlertDialog.Builder(orders_panel.this).create();
-        alertDialog.setTitle("Order Details\n");
-        alertDialog.setIcon(R.drawable.chef);
-        Map<String,Object> chosen_product = Approved.get(currentClickedOrderS);
-        String str = convertWithIteration(chosen_product);
-
-        alertDialog.setMessage(str);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Back",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
-
-    }
     public String convertWithIteration(Map<String, Object> chosen_product) {
         StringBuilder mapAsString = new StringBuilder();
         List<Map<String, Object>> items = (List<Map<String, Object>>) chosen_product.get("items");
@@ -223,12 +149,6 @@ public class orders_panel extends AppCompatActivity {
         }
 
 
-//        StringBuilder mapAsString = new StringBuilder();
-//        for (String key : chosen_product.keySet()) {
-//                mapAsString.append(key + ": " + chosen_product.get(key));
-//                mapAsString.append("\n");
-//        }
-//        //mapAsString.delete(mapAsString.length()-2, mapAsString.length()).append("}");
        return mapAsString.toString();
     }
 }
