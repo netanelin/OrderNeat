@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#03A9F4"
+    android:background="#FFFFFF"
     tools:context=".menu">
 
     <ListView
         android:id="@+id/listViewProducts"
         android:layout_width="364dp"
-        android:layout_height="404dp"
+        android:layout_height="435dp"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
         android:clipToPadding="false"
@@ -24,21 +24,24 @@
 
     <Button
         android:id="@+id/btn_procceed_to_checkout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="362dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:text="procceed to checkout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#A4C9F3"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_price"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_price" />
 
     <Button
         android:id="@+id/resBtn"
         android:layout_width="71dp"
         android:layout_height="41dp"
         android:text="clear"
+        android:background="#A4C9F3"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/listViewProducts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -62,30 +65,27 @@
         android:id="@+id/tv_Total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="15dp"
         android:paddingLeft="6dp"
         android:text="Total:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/tv_price"
+        app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="@+id/listViewProducts"
-        app:layout_constraintTop_toBottomOf="@+id/listViewProducts"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/listViewProducts" />
 
     <TextView
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="69dp"
         android:paddingLeft="6dp"
         android:text="price"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_Total"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Total"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Total"
+        app:layout_constraintStart_toStartOf="@+id/listViewProducts"
+        app:layout_constraintTop_toTopOf="@+id/tv_Total"
+        app:layout_constraintVertical_bias="0.588" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
