@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,15 +30,16 @@ import java.util.Map;
 public class register extends AppCompatActivity {
     private static final String TAG = "registerNewEmailPassword";
 
-    private Button _continue;
-    private EditText et_first_name;
-    private EditText et_last_name;
+    private Button sign_up;
+    private Switch employee_switch;
+    private EditText et_full_name;
     private EditText et_phone_number;
     private EditText et_email;
     private EditText et_password;
+
     private ProgressBar pb;
+
     private FirebaseAuth mAuth;
-    private CheckBox cb_as_employee;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Map<String, Object> getUserAsMap(String first_name, String last_name, String phone_number, boolean employee){
@@ -59,17 +61,16 @@ public class register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        _continue = findViewById(R.id.btnContinue);
-        et_first_name = findViewById(R.id.et_first_name);
-        et_last_name = findViewById(R.id.et_last_name);
+        setContentView(R.layout.activity_sign_up);
+        sign_up = findViewById(R.id.bt_sign_up);
+        et_full_name = findViewById(R.id.et_full_name);
         et_phone_number = findViewById(R.id.et_phone);
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
         pb = findViewById(R.id.pb);
-        cb_as_employee = findViewById(R.id.cb_as_employee);
+        employee_switch = findViewById(R.id.switch_employee);
 
-        _continue.setOnClickListener(new View.OnClickListener() {
+        sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 register();
@@ -77,25 +78,43 @@ public class register extends AppCompatActivity {
 
     public void register(){
 
+        String full_name = et_full_name.getText().toString();
 
-        String first_name = et_first_name.getText().toString();
-        String last_name  = et_last_name.getText().toString();
         String phone_number  = et_phone_number.getText().toString();
         String email = et_email.getText().toString();
         String password = et_password.getText().toString();
 
-
-        if(first_name.isEmpty()) //if email is empty
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) //if the email is not valid
         {
-            et_first_name.setError("First name is required");
-            et_first_name.requestFocus();
+            et_email.setError("please enter a valid email");
+            et_email.requestFocus();
             return;
         }
 
-        if(last_name.isEmpty()) //if email is empty
+        if(password.isEmpty()) //if password is empty
         {
-            et_last_name.setError("Last name is required");
-            et_last_name.requestFocus();
+            et_password.setError("password is required");
+            et_password.requestFocus();
+            return;
+        }
+
+        if(password.length() < 6) //the password need to be over than 5
+        {
+            et_password.setError("minimum length of password should be 6");
+            et_password.requestFocus();
+            return;
+        }
+        if(full_name.isEmpty()) //if name is empty
+        {
+            et_full_name.setError("Full name is required");
+            et_full_name.requestFocus();
+            return;
+        }
+
+        if(full_name.indexOf(' ') == -1) //if user havnt insert 2 names
+        {
+            et_full_name.setError("Full name is required");
+            et_full_name.requestFocus();
             return;
         }
 
@@ -121,27 +140,12 @@ public class register extends AppCompatActivity {
             return;
         }
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) //if the email is not valid
-        {
-            et_email.setError("please enter a valid email");
-            et_email.requestFocus();
-            return;
-        }
 
-        if(password.isEmpty()) //if password is empty
-        {
-            et_password.setError("password is required");
-            et_password.requestFocus();
-            return;
-        }
 
-        if(password.length() < 6) //the password need to be over than 5
-        {
-            et_password.setError("minimum length of password should be 6");
-            et_password.requestFocus();
-            return;
-        }
 
+
+        String first_name = full_name.substring(0, full_name.indexOf(' '));
+        String last_name  = full_name.substring(full_name.indexOf(' ')+1);
        mAuth = FirebaseAuth.getInstance();
         pb.setVisibility(View.VISIBLE);
        //creating new user in firebase authentication
@@ -156,10 +160,10 @@ public class register extends AppCompatActivity {
 
                            //create new user info document on firestore
                            //creating map representing the new user
-                           Map<String,Object> userM = getUserAsMap(et_first_name.getText().toString(),
-                                   et_last_name.getText().toString(),
+                           Map<String,Object> userM = getUserAsMap(first_name,
+                                   last_name,
                                    et_phone_number.getText().toString(),
-                                   cb_as_employee.isChecked());
+                                   employee_switch.isChecked());
 
                            //creating new document named as the user uid in "Users" collection
                            db.collection("Users").document(mAuth.getUid())
@@ -172,7 +176,7 @@ public class register extends AppCompatActivity {
 
                                            //redirect the new user to next activity by role
                                            //redirect employee to order managment
-                                           if(cb_as_employee.isChecked()){
+                                           if(employee_switch.isChecked()){
                                                Intent direct_to_orders_panel = new Intent(register.this, login.class);
                                                startActivity(direct_to_orders_panel);
                                                Toast.makeText(register.this,"Please wait for approval",Toast.LENGTH_LONG).show();
@@ -182,8 +186,6 @@ public class register extends AppCompatActivity {
                                                startActivity(direct_to_menu_page);
                                                finish();
                                            }
-
-
 
                                        }
 
@@ -198,7 +200,7 @@ public class register extends AppCompatActivity {
                        } else {
                            // If sign in fails, display a message to the user.
                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                           Toast.makeText(register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(register.this, "createUserWithEmail:failure.", Toast.LENGTH_SHORT).show();
                        }
                    }
                });
