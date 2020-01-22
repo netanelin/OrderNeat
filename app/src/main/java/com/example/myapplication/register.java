@@ -9,7 +9,6 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -139,10 +138,6 @@ public class register extends AppCompatActivity {
             et_email.requestFocus();
             return;
         }
-
-
-
-
 
         String first_name = full_name.substring(0, full_name.indexOf(' '));
         String last_name  = full_name.substring(full_name.indexOf(' ')+1);

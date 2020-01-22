@@ -26,14 +26,15 @@
         android:id="@+id/btn_procceed_to_checkout"
         android:layout_width="362dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="57dp"
         android:background="#A4C9F3"
         android:text="procceed to checkout"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_price"
+        app:layout_constraintTop_toTopOf="@+id/tv_price"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
