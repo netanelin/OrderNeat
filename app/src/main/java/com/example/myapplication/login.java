@@ -47,7 +47,6 @@ public class login extends AppCompatActivity {
         bt_register.setOnClickListener(v -> {
           Intent direct_to_costumer_register_page = new Intent(login.this, register.class);
           startActivity(direct_to_costumer_register_page);
-          finish();
         });
 
         //login process

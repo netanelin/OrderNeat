@@ -99,11 +99,19 @@ public class orders_panel extends AppCompatActivity {
 
 
     private void openApprovalDialog() {
+        Map<String, Object> chosen_product = waiting_list.get(currentClickedWaitingOrder);
+        String message = "Order description:\n";
+        List<Map<String, Object>> itemsList = (List<Map<String, Object>>)chosen_product.get("items");
+        for (Map<String, Object> item : itemsList){
+            message += "item name: " + item.get("name")+"\n";
+            message += "quantity: " +item.get("quantity")+"\n\n";
+        }
+
         AlertDialog alertDialog = new AlertDialog.Builder(orders_panel.this).create();
         alertDialog.setTitle("Serve order\n");
-        alertDialog.setMessage("Please confirm order has been served");
+        alertDialog.setMessage("Please confirm order has been served\n" + message);
         alertDialog.setIcon(R.drawable.chef);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Map<String, Object> chosen_product = waiting_list.get(currentClickedWaitingOrder);
@@ -112,7 +120,7 @@ public class orders_panel extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 dialog.dismiss();
@@ -122,33 +130,33 @@ public class orders_panel extends AppCompatActivity {
 
     }
 
-
-    public String convertWithIteration(Map<String, Object> chosen_product) {
-        StringBuilder mapAsString = new StringBuilder();
-        List<Map<String, Object>> items = (List<Map<String, Object>>) chosen_product.get("items");
-        int i = 0;
-        for (Map<String, Object> item : items){
-            mapAsString.append("Dish Name: "+items.get(i).get("name"));
-            mapAsString.append("\n");
-            mapAsString.append("Price: "+items.get(i).get("price")+" ILS");
-            mapAsString.append("\n");
-            mapAsString.append("Quantity: "+items.get(i).get("quantity"));
-            mapAsString.append("\n");
-            i++;
-            mapAsString.append("\n");
-            mapAsString.append("\n");
-
-        }
-        mapAsString.append("Total: "+chosen_product.get("total").toString()+" ILS");
-        mapAsString.append("\n");
-        mapAsString.append("\n");
-        if(chosen_product.get("comments").toString().equals(null)){
-            mapAsString.append("Comments: Nothing");
-        }else {
-            mapAsString.append("Comments: "+chosen_product.get("comments").toString());
-        }
-
-
-       return mapAsString.toString();
-    }
+//
+//    public String convertWithIteration(Map<String, Object> chosen_product) {
+//        StringBuilder mapAsString = new StringBuilder();
+//        List<Map<String, Object>> items = (List<Map<String, Object>>) chosen_product.get("items");
+//        int i = 0;
+//        for (Map<String, Object> item : items){
+//            mapAsString.append("Dish Name: "+items.get(i).get("name"));
+//            mapAsString.append("\n");
+//            mapAsString.append("Price: "+items.get(i).get("price")+" ILS");
+//            mapAsString.append("\n");
+//            mapAsString.append("Quantity: "+items.get(i).get("quantity"));
+//            mapAsString.append("\n");
+//            i++;
+//            mapAsString.append("\n");
+//            mapAsString.append("\n");
+//
+//        }
+//        mapAsString.append("Total: "+chosen_product.get("total").toString()+" ILS");
+//        mapAsString.append("\n");
+//        mapAsString.append("\n");
+//        if(chosen_product.get("comments").toString().equals(null)){
+//            mapAsString.append("Comments: Nothing");
+//        }else {
+//            mapAsString.append("Comments: "+chosen_product.get("comments").toString());
+//        }
+//
+//
+//       return mapAsString.toString();
+//    }
 }
