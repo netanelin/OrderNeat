@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0590B5"
+    android:background="#FFFFFF"
     tools:context=".manager_panel">
 
     <TextView
@@ -23,13 +23,14 @@
         android:id="@+id/button_manage_employees"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="#A4C9F3"
         android:includeFontPadding="true"
         android:outlineAmbientShadowColor="#9C0537"
         android:outlineProvider="background"
         android:outlineSpotShadowColor="#9C0537"
         android:paddingHorizontal="10dp"
         android:text="manage employees"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
