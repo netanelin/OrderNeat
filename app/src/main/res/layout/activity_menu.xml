@@ -27,27 +27,26 @@
         android:layout_width="362dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:text="procceed to checkout"
         android:background="#A4C9F3"
+        android:text="procceed to checkout"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_price" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_price"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/resBtn"
-        android:layout_width="71dp"
-        android:layout_height="41dp"
-        android:text="clear"
+        android:layout_width="60dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="25dp"
         android:background="#A4C9F3"
+        android:text="clear"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/listViewProducts"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/listViewProducts"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Menu"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/listViewProducts"
+        app:layout_constraintTop_toBottomOf="@+id/listViewProducts" />
 
     <TextView
         android:id="@+id/tv_Menu"
