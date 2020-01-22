@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#03A9F4"
+    android:background="#FFFFFF"
     android:hapticFeedbackEnabled="true"
     tools:context=".checkout">
 
@@ -100,10 +100,11 @@
         android:id="@+id/bt_place_order"
         android:layout_width="320dp"
         android:layout_height="55dp"
-        android:background="#3F51B5"
+        android:background="#A4C9F3"
         android:hapticFeedbackEnabled="true"
         android:shadowColor="#00B40000"
         android:text="Place order"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"

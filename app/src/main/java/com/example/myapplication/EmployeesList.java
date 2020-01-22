@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class EmployeesList extends  ArrayAdapter<Map<String, Object>> {
         View listViewItem = inflater.inflate(R.layout.employee_list_layout, null, true);
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textView_name);
         TextView textViewPhone = (TextView) listViewItem.findViewById(R.id.textView_phone);
+        ImageView imageViewUser = (ImageView) listViewItem.findViewById(R.id.imageView5);
 
         Map<String, Object> employee = employees_list.get(position);
 

@@ -134,7 +134,7 @@ public class login extends AppCompatActivity {
 
                                         //if user is a manager direct him to manager_panel
                                         if(sRole.equals("manager")){
-                                            Intent direct_to_manager_panel = new Intent(login.this, manager_panel.class);
+                                            Intent direct_to_manager_panel = new Intent(login.this, Employees_management.class);
                                             startActivity(direct_to_manager_panel);
                                             finish();
                                         }
