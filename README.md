@@ -1,5 +1,6 @@
 # Order & Eat
 Restaurants dining experience reimagined.
+
 Costumers can check in at a table using QR code, browse the manu, order food and pay independently using their Android device.
 Native Android app.   
 
